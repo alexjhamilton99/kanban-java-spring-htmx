@@ -3,6 +3,9 @@ target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
+secrets.properties
+/test-coverage
+/tomcat
 
 ### STS ###
 .apt_generated
