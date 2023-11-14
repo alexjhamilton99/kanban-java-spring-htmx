@@ -51,5 +51,5 @@ public record SecurityUser(
     public boolean isEnabled() {
         return true;
     }
-    
+
 }

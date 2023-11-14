@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Kanban Home Page</title>
+    <script th:src="@{/webjars/htmx.org/dist/htmx.js}"></script>
+</head>
+<body hx-boost="true">
+
+<h1>Home</h1>
+
+<button hx-post="/logout" type="button" hx-confirm="Are you sure you want to log out?"
+        th:name="${_csrf.parameterName}" th:value="${_csrf.token}" hx-target="body">Log Out
+</button>
+
+</body>
+</html>

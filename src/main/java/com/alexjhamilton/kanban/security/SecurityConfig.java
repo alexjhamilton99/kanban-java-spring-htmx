@@ -2,7 +2,6 @@ package com.alexjhamilton.kanban.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -12,22 +11,23 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig {
+class SecurityConfig {
 
     private final UserDetailsService userDetailsService;
 
-    public SecurityConfig(UserDetailsService userDetailsService) {
+    SecurityConfig(UserDetailsService userDetailsService) {
         this.userDetailsService = userDetailsService;
     }
 
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
-                .authorizeHttpRequests(authz -> authz.anyRequest().authenticated())
+        return http
+                .authorizeHttpRequests(authz -> authz
+                        .requestMatchers("/webjars/**", "/login/**").permitAll()
+                        .anyRequest().authenticated())
+                .formLogin(form -> form.loginPage("/login").permitAll())
                 .userDetailsService(userDetailsService)
-                .formLogin(Customizer.withDefaults());
-
-        return http.build();
+                .build();
     }
 
     @Bean
