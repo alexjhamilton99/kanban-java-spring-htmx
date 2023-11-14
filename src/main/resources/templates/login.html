@@ -10,7 +10,7 @@
 
 <h1>Kanban Login</h1>
 
-<form action="/login" method="post">
+<form th:action="@{/login}" method="post">
 
     <div th:if="${param.error}">Invalid credentials.</div>
 
