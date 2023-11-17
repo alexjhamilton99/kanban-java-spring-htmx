@@ -17,7 +17,7 @@ public record Task(
         LocalDate dueDate,
         Priority priority,
         Status status,
-        AggregateReference<User, Long> owningUser,
+        AggregateReference<OwningUser, Long> owningUser,
         @MappedCollection(idColumn = "task_id", keyColumn = "user_id") Set<TaggedUserRef> taggedUsers
 ) {
 
