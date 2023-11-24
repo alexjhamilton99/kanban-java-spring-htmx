@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<!--------------------------------------------------------------------------------------------------------------------->
+
+<header th:fragment="header" id="header">
+
+    <button hx-post="/logout" type="button" hx-confirm="Are you sure you want to log out?"
+            th:name="${_csrf.parameterName}" th:value="${_csrf.token}" hx-target="body">Log Out
+    </button>
+
+    <nav>
+        <ul>
+            <li>
+                <a href="/tasks/kanban" hx-get="/kanban" hx-push-url="true" hx-target="closest main">Kanban</a>
+            </li>
+            <li>
+                <a href="/tasks/calendar" hx-get="/calendar" hx-push-url="true" hx-target="closest main">Calendar</a>
+            </li>
+            <li>
+                <a href="/tasks" hx-get="/tasks" hx-push-url="true" hx-target="#main">Task Search</a>
+            </li>
+        </ul>
+    </nav>
+
+</header>
+
+
+<!--------------------------------------------------------------------------------------------------------------------->
+
+</html>

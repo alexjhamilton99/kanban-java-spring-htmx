@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8">
+    <title>Task Search</title>
+    <script th:src="@{/webjars/htmx.org/dist/htmx.js}"></script>
+  </head>
+  <body hx-boost="true">
+
+    <header th:replace="~{fragments/general :: header}"></header>
+
+    <main id="main">
+
+      <h1>Task Search</h1>
+
+      <div style="display: flex; padding-bottom: 1em;">
+
+        <div style="padding-right: 1em;">
+          <label for="name">Name:</label>
+          <input id="name" name="name" placeholder="Contains..."/>
+        </div>
+
+        <div style="padding-right: 1em;">
+          <label for="priority">Priority:</label>
+          <select id="priority" name="priority">
+            <option th:each="priority : ${T(com.alexjhamilton.kanban.task.domain.Priority).values()}"
+                    value="${priority.name}">[[${priority.name}]]
+            </option>
+          </select>
+        </div>
+
+        <div>
+          <label for="status">Status:</label>
+          <select id="status" name="status">
+            <option th:each="status : ${T(com.alexjhamilton.kanban.task.domain.Status).values()}"
+                    value="${status.name}">[[${status.name}]]
+            </option>
+          </select>
+        </div>
+
+      </div>
+
+      <table id="task_table">
+
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Priority</th>
+            <th>Status</th>
+            <th>Due Date</th>
+          </tr>
+        </thead>
+
+        <tbody id="task_tbody">
+          <tr th:each="task: ${tasks}">
+            <td th:text="${task.name()}"></td>
+            <td th:text="${task.priority()}"></td>
+            <td th:text="${task.status()}"></td>
+            <td th:text="${task.dueDate()}"></td>
+            <td th:text="${task.id()}" style="padding-left: 2em;"></td>
+          </tr>
+        </tbody>
+
+      </table>
+
+    </main>
+
+  </body>
+</html>
