@@ -1,9 +1,6 @@
 package com.alexjhamilton.kanban.task;
 
 import com.alexjhamilton.kanban.task.domain.*;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Slice;
-import org.springframework.data.domain.Sort;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
@@ -97,19 +94,6 @@ public class TaskService {
             case TaskSortCol.due_date ->
                     jdbcTemplate.query(sql, TASK_DTO_ROW_MAPPER, dueDateCursor, idCursor, nameContains);
         };
-    }
-
-    @Transactional
-    public void saveTaskTemp(Task task) {
-        taskRepository.save(task);
-    }
-
-    public long countAllTasks() {
-        return taskRepository.count();
-    }
-
-    public Slice<TaskDto> fetchSlice() {
-        return taskRepository.findTop25By(PageRequest.of(50_000, 25, Sort.by("name")));
     }
 
 }
